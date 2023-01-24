@@ -22,16 +22,25 @@ public class displayTrack {
         int count;
         for(String trackColor: trackMap.keySet()) {
             if (trackColor.equals("Red") || trackColor.equals("Yellow")) {
-                System.out.println(trackColor);
+                System.out.print(trackColor + " ");
                 count = 2;
                 for (boolean block: trackMap.get(trackColor)){
-                    if (block) System.out.println("- ");
-                    else System.out.println(count + " ");
+                    if (block) System.out.print("- ");
+                    else System.out.print(count + " ");
                     count++;
                 }
-                System.out.println("\n");
+                System.out.print("@\n");
             }
-
+            else {
+                System.out.print(trackColor + " ");
+                count = 12;
+                for (boolean block: trackMap.get(trackColor)){
+                    if (block) System.out.print("- ");
+                    else System.out.print(count + " ");
+                    count--;
+                }
+                System.out.print("@\n");
+            }
         }
     }
 

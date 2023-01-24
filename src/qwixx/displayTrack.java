@@ -4,10 +4,11 @@ import java.util.*;
 
 
 public class displayTrack {
-    static Map<String, boolean[]> trackMap = new LinkedHashMap<>();
+    static LinkedHashMap<String, boolean[]> trackMap = new LinkedHashMap<>();
 
     public static void main(String[] args) {
         fillTrackMap();
+        displayTracks(trackMap);
     }
 
     public static void fillTrackMap() {
@@ -18,10 +19,21 @@ public class displayTrack {
     }
 
     public static void displayTracks(LinkedHashMap card) {
-        for (boolean place:trackMap.get("Red")) {
-            System.out.println(place);
-        }
+        int count;
+        for(String trackColor: trackMap.keySet()) {
+            if (trackColor.equals("Red") || trackColor.equals("Yellow")) {
+                System.out.println(trackColor);
+                count = 2;
+                for (boolean block: trackMap.get(trackColor)){
+                    if (block) System.out.println("- ");
+                    else System.out.println(count + " ");
+                    count++;
+                }
+                System.out.println("\n");
+            }
 
+        }
     }
+
 }
 

@@ -1,9 +1,8 @@
 package qwixx;
 import java.util.*;
-//m
 public class DisplayCard {
 
-    LinkedHashMap<String, boolean[]> trackMap;
+    public LinkedHashMap<String, boolean[]> trackMap;
     static char[] penalties= {'_', '_', '_', '_'};
 
     public String name;

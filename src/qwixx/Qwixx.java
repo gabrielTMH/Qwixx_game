@@ -7,15 +7,15 @@ public class Qwixx {
         playerOne.displayPlayerCard();
         playerTwo.displayPlayerCard();
 
-        playerOne.checkBoxes("Green", 7);
-        playerOne.checkBoxes("Green", 9);
-        playerOne.checkBoxes("Red", 2);
+        playerOne.checkBox("Green", 7);
+        playerOne.checkBox("Green", 9);
+        playerOne.checkBox("Red", 2);
 
 
 
-        playerTwo.checkBoxes("Green", 6);
-        playerTwo.checkBoxes("Green", 11);
-        playerTwo.checkBoxes("Red", 9);
+        playerTwo.checkBox("Green", 6);
+        playerTwo.checkBox("Green", 11);
+        playerTwo.checkBox("Red", 9);
 
         playerOne.displayPlayerCard();
         playerTwo.displayPlayerCard();

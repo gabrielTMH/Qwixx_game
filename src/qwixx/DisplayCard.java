@@ -42,6 +42,7 @@ public class DisplayCard {
                 count = 2;
                 for (int box: card.get(trackColor)){
                     if (box == 1) System.out.print("X ");
+                    else if (box == -1) System.out.print("- ");
                     else System.out.print(count + " ");
                     count++;
                 }
@@ -52,6 +53,7 @@ public class DisplayCard {
                 count = 12;
                 for (int box : card.get(trackColor)) {
                     if (box == 1) System.out.print("X ");
+                    else if (box == -1) System.out.print("- ");
                     else System.out.print(count + " ");
                     count--;
                 }
@@ -65,10 +67,14 @@ public class DisplayCard {
         for (char penalty:penalties) System.out.print(penalty + " ");
     }
 
-//    public void hideUnavailable(String color, int num) {
-//
-//    }
-    public void checkBoxes(String color, int num){
+    public void hideUnavailable(String color, int index) {
+        for (int i = index; i >= 0 ; i--) {
+            if(this.trackMap.get(color)[i]==0){
+                this.trackMap.get(color)[i] = -1;
+            }
+        }
+    }
+    public void checkBox(String color, int num){
         int index;
         //Add statement for illegal move (i.g. 13)
         if(color.equals("Red") || color.equals("Yellow")){
@@ -78,6 +84,7 @@ public class DisplayCard {
             index = 12-num;
         }
         this.trackMap.get(color)[index] = 1;
+        hideUnavailable(color, index);
     }
 }
 

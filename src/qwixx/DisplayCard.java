@@ -3,36 +3,38 @@ import java.util.*;
 
 public class DisplayCard {
 
-    static LinkedHashMap<String, boolean[]> trackMap = new LinkedHashMap<>();
+    LinkedHashMap<String, boolean[]> trackMap;
     static char[] penalties= {'_', '_', '_', '_'};
 
-    public static void main(String[] args) {
-        fillTrackMap();
-        displayTracks(trackMap);
-        displayPenalties();
+    public String name;
+
+    public DisplayCard(String name){
+        this.name = name;
+        this.trackMap = createTrackMap();
     }
-    public static void displayPlayerCard(String name){
-        System.out.println(name);
-        fillTrackMap();
+    public void displayPlayerCard(){
+        System.out.println(this.name);
         displayTracks(trackMap);
         displayPenalties();
         System.out.println("\n");
     }
 
-    public static void fillTrackMap() {
-        trackMap.put("Red",new boolean[11]);
-        trackMap.put("Yellow",new boolean[11]);
-        trackMap.put("Green",new boolean[11]);
-        trackMap.put("Blue",new boolean[11]);
+    public static LinkedHashMap<String, boolean[]> createTrackMap() {
+        LinkedHashMap<String, boolean[]> playerMap = new LinkedHashMap<>();
+        playerMap.put("Red",new boolean[11]);
+        playerMap.put("Yellow",new boolean[11]);
+        playerMap.put("Green",new boolean[11]);
+        playerMap.put("Blue",new boolean[11]);
+        return playerMap;
     }
 
     public static void displayTracks(LinkedHashMap<String, boolean[]> card) {
         int count;
-        for(String trackColor: trackMap.keySet()) {
+        for(String trackColor: card.keySet()) {
             if (trackColor.equals("Red") || trackColor.equals("Yellow")) {
                 System.out.print(trackColor + " ");
                 count = 2;
-                for (boolean block: trackMap.get(trackColor)){
+                for (boolean block: card.get(trackColor)){
                     if (block) System.out.print("- ");
                     else System.out.print(count + " ");
                     count++;
@@ -42,7 +44,7 @@ public class DisplayCard {
             else {
                 System.out.print(trackColor + " ");
                 count = 12;
-                for (boolean block : trackMap.get(trackColor)) {
+                for (boolean block : card.get(trackColor)) {
                     if (block) System.out.print("- ");
                     else System.out.print(count + " ");
                     count--;

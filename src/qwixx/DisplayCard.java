@@ -1,9 +1,15 @@
 package qwixx;
 import java.util.*;
+
+//0 -> unmarked
+//-1 -> unavailable
+//1 -> checked
+
+
 public class DisplayCard {
 
     //sus on public vs static vs private
-    public LinkedHashMap<String, boolean[]> trackMap;
+    public LinkedHashMap<String, int[]> trackMap;
     static char[] penalties= {'_', '_', '_', '_'};
 
     public String name;
@@ -19,23 +25,23 @@ public class DisplayCard {
         System.out.println("\n");
     }
 
-    public static LinkedHashMap<String, boolean[]> createTrackMap() {
-        LinkedHashMap<String, boolean[]> playerMap = new LinkedHashMap<>();
-        playerMap.put("Red",new boolean[11]);
-        playerMap.put("Yellow",new boolean[11]);
-        playerMap.put("Green",new boolean[11]);
-        playerMap.put("Blue",new boolean[11]);
+    public static LinkedHashMap<String, int[]> createTrackMap() {
+        LinkedHashMap<String, int[]> playerMap = new LinkedHashMap<>();
+        playerMap.put("Red",new int[11]);
+        playerMap.put("Yellow",new int[11]);
+        playerMap.put("Green",new int[11]);
+        playerMap.put("Blue",new int[11]);
         return playerMap;
     }
 
-    public static void displayTracks(LinkedHashMap<String, boolean[]> card) {
+    public static void displayTracks(LinkedHashMap<String, int[]> card) {
         int count;
         for(String trackColor: card.keySet()) {
             if (trackColor.equals("Red") || trackColor.equals("Yellow")) {
                 System.out.print(trackColor + " ");
                 count = 2;
-                for (boolean block: card.get(trackColor)){
-                    if (block) System.out.print("X ");
+                for (int box: card.get(trackColor)){
+                    if (box == 1) System.out.print("X ");
                     else System.out.print(count + " ");
                     count++;
                 }
@@ -44,8 +50,8 @@ public class DisplayCard {
             else {
                 System.out.print(trackColor + " ");
                 count = 12;
-                for (boolean block : card.get(trackColor)) {
-                    if (block) System.out.print("X ");
+                for (int box : card.get(trackColor)) {
+                    if (box == 1) System.out.print("X ");
                     else System.out.print(count + " ");
                     count--;
                 }
@@ -58,6 +64,10 @@ public class DisplayCard {
         System.out.print("Penalties ");
         for (char penalty:penalties) System.out.print(penalty + " ");
     }
+
+//    public void hideUnavailable(String color, int num) {
+//
+//    }
     public void checkBoxes(String color, int num){
         int index;
         //Add statement for illegal move (i.g. 13)
@@ -67,7 +77,7 @@ public class DisplayCard {
         else{
             index = 12-num;
         }
-        this.trackMap.get(color)[index] = true;
+        this.trackMap.get(color)[index] = 1;
     }
 }
 

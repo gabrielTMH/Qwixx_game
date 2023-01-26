@@ -35,7 +35,7 @@ public class DisplayCard {
                 System.out.print(trackColor + " ");
                 count = 2;
                 for (boolean block: card.get(trackColor)){
-                    if (block) System.out.print("- ");
+                    if (block) System.out.print("X ");
                     else System.out.print(count + " ");
                     count++;
                 }
@@ -45,7 +45,7 @@ public class DisplayCard {
                 System.out.print(trackColor + " ");
                 count = 12;
                 for (boolean block : card.get(trackColor)) {
-                    if (block) System.out.print("- ");
+                    if (block) System.out.print("X ");
                     else System.out.print(count + " ");
                     count--;
                 }
@@ -58,6 +58,16 @@ public class DisplayCard {
         System.out.print("Penalties ");
         for (char penalty:penalties) System.out.print(penalty + " ");
     }
-
+    public void checkBoxes(String color, int num){
+        int index;
+        //Add statement for illegal move (i.g. 13)
+        if(color.equals("Red") || color.equals("Yellow")){
+            index = num-2;
+        }
+        else{
+            index = 12-num;
+        }
+        this.trackMap.get(color)[index] = true;
+    }
 }
 

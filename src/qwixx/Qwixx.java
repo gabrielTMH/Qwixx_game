@@ -1,11 +1,20 @@
 package qwixx;
 
+import java.util.Scanner;
+
 public class Qwixx {
     public static void main(String[] args) {
-        DisplayCard playerOne = new DisplayCard("player one");
-        DisplayCard playerTwo = new DisplayCard("player two");
+        Scanner scan = new Scanner(System.in);
+        String name1= scan.nextLine();
+        String name2= scan.nextLine();
+
+
+        DisplayCard playerOne = new DisplayCard(name1);
+        DisplayCard playerTwo = new DisplayCard(name2);
         playerOne.displayPlayerCard();
         playerTwo.displayPlayerCard();
+
+
 
         playerOne.checkBox("Green", 7);
         playerOne.checkBox("Green", 9);

@@ -1,7 +1,7 @@
 package qwixx;
 import java.util.*;
 
-public class displayCard {
+public class DisplayCard {
 
     static LinkedHashMap<String, boolean[]> trackMap = new LinkedHashMap<>();
     static char[] penalties= {'_', '_', '_', '_'};
@@ -11,7 +11,13 @@ public class displayCard {
         displayTracks(trackMap);
         displayPenalties();
     }
-
+    public static void displayPlayerCard(String name){
+        System.out.println(name);
+        fillTrackMap();
+        displayTracks(trackMap);
+        displayPenalties();
+        System.out.println("\n");
+    }
 
     public static void fillTrackMap() {
         trackMap.put("Red",new boolean[11]);
@@ -20,7 +26,7 @@ public class displayCard {
         trackMap.put("Blue",new boolean[11]);
     }
 
-    public static void displayTracks(LinkedHashMap card) {
+    public static void displayTracks(LinkedHashMap<String, boolean[]> card) {
         int count;
         for(String trackColor: trackMap.keySet()) {
             if (trackColor.equals("Red") || trackColor.equals("Yellow")) {

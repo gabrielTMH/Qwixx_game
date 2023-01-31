@@ -8,14 +8,14 @@ public class Qwixx {
         Scanner scan = new Scanner(System.in);
         LinkedHashMap<String, DisplayCard> players = new LinkedHashMap<>();
         int numPlayers = scan.nextInt();
-        for (int i = 0; i <= numPlayers; ++i) {
+        int i = 0;
+        while (i < numPlayers) {
             String name = scan.nextLine();
-            players.put(name, new DisplayCard(name));
+            if (!name.equals("")) {
+                players.put(name, new DisplayCard(name));
+                ++i;
+            }
         }
-
-        for (DisplayCard playerCard: players.values()) {
-            playerCard.displayPlayerCard();
-        }
-
+        for (DisplayCard playerCard: players.values()) playerCard.displayPlayerCard();
     }
 }

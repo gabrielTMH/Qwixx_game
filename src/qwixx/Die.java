@@ -32,4 +32,8 @@ public class  Die {
         return (int)(Math.floor(Math.random() *6))+1;
     }
 
+    public int sumWhite() {
+        return dieSet.get("White1")+dieSet.get("White2");
+    }
+
 }

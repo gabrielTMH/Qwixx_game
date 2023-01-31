@@ -1,15 +1,18 @@
 package qwixx;
 import java.util.*;
 
-//0 -> unmarked
-//-1 -> unavailable
-//1 -> checked
-
+/*
+    possibly change to enum
+ 0 -> unmarked
+-1 -> unavailable
+ 1 -> checked
+*/
 
 public class DisplayCard {
 
     //sus on public vs static vs private
     public LinkedHashMap<String, int[]> trackMap;
+    //penalty not static
     static char[] penalties= {'_', '_', '_', '_'};
 
     public String name;

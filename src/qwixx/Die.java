@@ -1,6 +1,6 @@
 package qwixx;
 
-public class Die {
+public class  Die {
     private int value;
 
     public void roll(){

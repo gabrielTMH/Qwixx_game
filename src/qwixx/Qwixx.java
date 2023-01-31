@@ -16,5 +16,8 @@ public class Qwixx {
             players.put(name, new DisplayCard(name));
         }
         for (DisplayCard playerCard: players.values()) playerCard.displayPlayerCard();
+        Die dice = new Die();
+        dice.rollAll();
+        dice.rollAll();
     }
 }

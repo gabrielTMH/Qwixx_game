@@ -12,7 +12,7 @@ public class DisplayCard {
             return result;
         }
     }
-
+//
     public LinkedHashMap<String, Object[]> trackMap;
 
     char[] penalties= {'_', '_', '_', '_'};
@@ -84,7 +84,10 @@ public class DisplayCard {
         //Add statement for illegal move (i.g. 13)
         if(color.equals("Red") || color.equals("Yellow")) index = num - 2;
         else index = 12 - num;
-        this.trackMap.get(color)[index] = BoxValues.CHECKED;
+        if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
+            this.trackMap.get(color)[index] = BoxValues.CHECKED;
+        }
+        else System.out.println("invalid move");
         hideUnavailable(color, index);
     }
 }

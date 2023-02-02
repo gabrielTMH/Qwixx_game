@@ -52,4 +52,11 @@ public class DisplayCardTest {
         assertEquals(card.trackMap.get("Green")[8], DisplayCard.BoxValues.AVAILABLE);
     }
 
+    @Test
+    void checkLeftToRight() {
+        card.checkBox("Red", 6);
+        card.checkBox("Red", 3);
+        assertNotEquals(card.trackMap.get("Red")[3], DisplayCard.BoxValues.CHECKED);
+    }
+
 }

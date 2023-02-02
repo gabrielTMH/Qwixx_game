@@ -3,7 +3,6 @@ package qwixx;
 //import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +11,7 @@ public class DisplayCardTest {
     private DisplayCard card;
     @BeforeEach
     void setUp() {
-         card=new DisplayCard("test");
+         card = new DisplayCard("test");
     }
 
     @Test
@@ -26,11 +25,10 @@ public class DisplayCardTest {
     }
 
     @Test
-    void emptyDisplayDuringInitialization() {
-        //each int array should be full of 0s when initialized
+    void boxesAvailableAfterInitilization() {
         for(String color: card.trackMap.keySet()){
-            for(int box: card.trackMap.get(color)) {
-                assertEquals(box, 0);
+            for(Object box: card.trackMap.get(color)) {
+                assertEquals(box, DisplayCard.BoxValues.AVAILABLE);
             }
         }
     }
@@ -38,20 +36,20 @@ public class DisplayCardTest {
     @Test
     void checkBoxFunctions() {
         card.checkBox("Red", 7);
-        assertEquals(card.trackMap.get("Red")[5], 1);
+        assertEquals(card.trackMap.get("Red")[5], DisplayCard.BoxValues.CHECKED);
     }
 
     @Test
     void hideUnavailableFunctions() {
         card.checkBox("Red", 7);
-        assertEquals(card.trackMap.get("Red")[4], -1);
-        assertEquals(card.trackMap.get("Red")[3], -1);
-        assertEquals(card.trackMap.get("Red")[8], 0);
+        assertEquals(card.trackMap.get("Red")[4], DisplayCard.BoxValues.UNAVAILABLE);
+        assertEquals(card.trackMap.get("Red")[3], DisplayCard.BoxValues.UNAVAILABLE);
+        assertEquals(card.trackMap.get("Red")[8], DisplayCard.BoxValues.AVAILABLE);
 
         card.checkBox("Green", 6);
-        assertEquals(card.trackMap.get("Green")[4], -1);
-        assertEquals(card.trackMap.get("Green")[3], -1);
-        assertEquals(card.trackMap.get("Green")[8], 0);
+        assertEquals(card.trackMap.get("Green")[4], DisplayCard.BoxValues.UNAVAILABLE);
+        assertEquals(card.trackMap.get("Green")[3], DisplayCard.BoxValues.UNAVAILABLE);
+        assertEquals(card.trackMap.get("Green")[8], DisplayCard.BoxValues.AVAILABLE);
     }
 
 }

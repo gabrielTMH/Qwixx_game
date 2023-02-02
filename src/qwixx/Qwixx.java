@@ -8,9 +8,21 @@ public class Qwixx {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Enter number of players: ");
+        System.out.print("Enter number of players (2-5): ");
         //LinkedHashMap<String, DisplayCard> players = new LinkedHashMap<>();
         int numPlayers = scan.nextInt();
+        while (numPlayers < 2 || numPlayers > 5) {
+            if(numPlayers == 69) {
+                System.out.println("nice");//easter egg :)
+                System.out.println("You sound fucking crazy");
+                System.out.println("Kill Yourself");
+                System.exit(0);
+            }
+            else {
+                System.out.print("\nType a number between 2 and 5: ");
+                numPlayers = scan.nextInt();
+            }
+        }
         scan.nextLine(); // ensures we don't add the enter key after the numPlayers as a player
         for (int i = 1; i <= numPlayers; ++i) {
             System.out.print("\nEnter Player " + i + " Name: ");

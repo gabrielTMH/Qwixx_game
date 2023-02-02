@@ -11,7 +11,7 @@ public class DisplayCardTest {
     private DisplayCard card;
     @BeforeEach
     void setUp() {
-         card=new DisplayCard("test");
+         card = new DisplayCard("test");
     }
 
     @Test

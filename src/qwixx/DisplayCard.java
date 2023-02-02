@@ -13,10 +13,8 @@ public class DisplayCard {
         }
     }
 
-//    private PossibleBoxValues[] boxValues;
-
-    //sus on public vs static vs private
     public LinkedHashMap<String, Object[]> trackMap;
+
     char[] penalties= {'_', '_', '_', '_'};
 
     public String name;

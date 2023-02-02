@@ -6,40 +6,54 @@ import java.util.Scanner;
 public class Qwixx {
     static LinkedHashMap<String, DisplayCard> players = new LinkedHashMap<>();
 
+    static Die dice = new Die();
+
+    static Scanner scan = new Scanner(System.in);
+
+    static boolean gameOver = false;
+
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Enter number of players (2-5): ");
-        //LinkedHashMap<String, DisplayCard> players = new LinkedHashMap<>();
-        int numPlayers = scan.nextInt();
-        while (numPlayers < 2 || numPlayers > 5) {
-                System.out.print("\nType a number between 2 and 5: ");
-                numPlayers = scan.nextInt();
+        insertPlayers();
+        displayCards();
+        while (!gameOver) {
+            allPlayerTurn();
+            displayCards();
         }
+    }
+
+    private static void displayCards() {
+        for (DisplayCard playerCard : players.values()) playerCard.displayPlayerCard();
+    }
+
+    private static void insertPlayers() {
+        System.out.print("Enter number of players (2-5): ");
+
+        int numPlayers = scan.nextInt();
+
+        while (numPlayers < 2 || numPlayers > 5) {
+            System.out.print("\nType a number between 2 and 5: ");
+            numPlayers = scan.nextInt();
+        }
+
         scan.nextLine(); // ensures we don't add the enter key after the numPlayers as a player
+
         for (int i = 1; i <= numPlayers; ++i) {
             System.out.print("\nEnter Player " + i + " Name: ");
             String name = scan.nextLine();
             players.put(name, new DisplayCard(name));
         }
-        displayCards();
-//        for (DisplayCard playerCard: players.values()) playerCard.displayPlayerCard();
-        Die dice = new Die();
-        dice.rollAll();
+    }
 
-        for (String player: players.keySet()) {
+    private static void allPlayerTurn () {
+        dice.rollAll();
+        for (String player : players.keySet()) {
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
-            if(scan.nextLine().equals("yes")) {
+            if (scan.nextLine().equals("yes")) {
                 System.out.println("What color would you like to check off?");
-                //add something that makes it non case-sensitive
+                //add something that makes it non case-sensitive?
                 String color = scan.nextLine();
                 players.get(player).checkBox(color, dice.sumWhite());
             }
         }
-        displayCards();
-
-    }
-
-    private static void displayCards() {
-        for (DisplayCard playerCard: players.values()) playerCard.displayPlayerCard();
     }
 }

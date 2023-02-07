@@ -15,7 +15,7 @@ public class DisplayCard {
 //
     public LinkedHashMap<String, Object[]> trackMap;
 
-    char[] penalties= {'_', '_', '_', '_'};
+    public char[] penalties= {'_', '_', '_', '_'};
 
     public String name;
 
@@ -26,7 +26,7 @@ public class DisplayCard {
     public void displayPlayerCard(){
         System.out.println(this.name);
         displayTracks(trackMap);
-        displayPenalties();
+        displayPenalties(this);
         System.out.println("\n");
     }
 
@@ -67,9 +67,9 @@ public class DisplayCard {
         }
     }
 
-    public void displayPenalties() {
+    public void displayPenalties(DisplayCard name) {
         System.out.print("Penalties ");
-        for (char penalty:penalties) System.out.print(penalty + " ");
+        for (char penalty:name.penalties) System.out.print(penalty + " ");
     }
 
     public void hideUnavailable(String color, int index) {
@@ -90,5 +90,20 @@ public class DisplayCard {
         else System.out.println("invalid move");
         hideUnavailable(color, index);
     }
+
+    public void markPenalty() {
+        int countPenalties = 0;
+        for(char box: this.penalties) {
+            if (box== '_') {
+                this.penalties[countPenalties] = 'X';
+                break;
+            }
+            else {
+                countPenalties++;
+            }
+        }
+    }
+
+
 }
 

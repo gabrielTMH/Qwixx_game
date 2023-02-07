@@ -53,6 +53,7 @@ public class Qwixx {
                 //add something that makes it non case-sensitive?
                 String color = scan.nextLine();
                 players.get(player).checkBox(color, dice.sumWhite());
+                players.get(player).markPenalty();
             }
         }
     }

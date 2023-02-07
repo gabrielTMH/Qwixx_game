@@ -1,5 +1,6 @@
 package qwixx;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
@@ -12,11 +13,15 @@ public class Qwixx {
 
     static boolean gameOver = false;
 
+    static String activePlayer;
+
+    static Iterator iterator = players.entrySet().iterator();
+
     public static void main(String[] args) {
         insertPlayers();
         displayCards();
         while (!gameOver) {
-            allPlayerTurn();
+            turn();
             displayCards();
         }
     }
@@ -44,9 +49,11 @@ public class Qwixx {
         }
     }
 
-    private static void allPlayerTurn () {
+    private static void turn () {
         dice.rollAll();
+
         for (String player : players.keySet()) {
+            // skip over if not active player
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
             if (scan.nextLine().equals("yes")) {
                 System.out.println("What color would you like to check off?");
@@ -55,5 +62,16 @@ public class Qwixx {
                 players.get(player).checkBox(color, dice.sumWhite());
             }
         }
+
     }
+
+    private static void activePlayerTurn () {
+
+    }
+
+    private static void setActivePlayer () {
+        if (iterator.hasNext()) activePlayer = iterator.next().toString();
+        else activePlayer = players.entrySet().toArray()[0].toString();
+    }
+
 }

@@ -67,9 +67,9 @@ public class DisplayCard {
         }
     }
 
-    public void displayPenalties() {
+    public void displayPenalties( ) {
         System.out.print("Penalties ");
-        for (char penalty:penalties) System.out.print(penalty + " ");
+        for (char penalty:this.penalties) System.out.print(penalty + " ");
     }
 
     public void hideUnavailable(String color, int index) {
@@ -90,5 +90,20 @@ public class DisplayCard {
         else System.out.println("invalid move");
         hideUnavailable(color, index);
     }
+
+    public void markPenalty() {
+        int countPenalties = 0;
+        for(char box: this.penalties) {
+            if (box== '_') {
+                this.penalties[countPenalties] = 'X';
+                break;
+            }
+            else {
+                countPenalties++;
+            }
+        }
+    }
+
+
 }
 

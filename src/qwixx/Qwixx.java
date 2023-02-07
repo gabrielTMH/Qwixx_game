@@ -5,20 +5,21 @@ import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Qwixx {
+
     static LinkedHashMap<String, DisplayCard> players = new LinkedHashMap<>();
 
     static Die dice = new Die();
 
-    static Scanner scan = new Scanner(System.in);
+    static Scanner scan = new Scanner(System.in); // should exist within game but be set in quixx
 
     static boolean gameOver = false;
 
     static String activePlayer;
 
-    static Iterator iterator = players.entrySet().iterator();
-
+    static Iterator iterator;
     public static void main(String[] args) {
         insertPlayers();
+        iterator = players.entrySet().iterator();
         displayCards();
         while (!gameOver) {
             turn();

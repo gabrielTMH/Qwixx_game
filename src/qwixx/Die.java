@@ -3,6 +3,7 @@ package qwixx;
 import java.util.LinkedHashMap;
 
 public class  Die {
+
     public LinkedHashMap<String, Integer> dieSet = new LinkedHashMap<>();
 
     public Die() {

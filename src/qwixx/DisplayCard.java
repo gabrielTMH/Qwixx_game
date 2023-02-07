@@ -15,7 +15,7 @@ public class DisplayCard {
 //
     public LinkedHashMap<String, Object[]> trackMap;
 
-    public char[] penalties= {'_', '_', '_', '_'};
+    char[] penalties= {'_', '_', '_', '_'};
 
     public String name;
 
@@ -26,7 +26,7 @@ public class DisplayCard {
     public void displayPlayerCard(){
         System.out.println(this.name);
         displayTracks(trackMap);
-        displayPenalties(this);
+        displayPenalties();
         System.out.println("\n");
     }
 
@@ -67,9 +67,9 @@ public class DisplayCard {
         }
     }
 
-    public void displayPenalties(DisplayCard name) {
+    public void displayPenalties( ) {
         System.out.print("Penalties ");
-        for (char penalty:name.penalties) System.out.print(penalty + " ");
+        for (char penalty:this.penalties) System.out.print(penalty + " ");
     }
 
     public void hideUnavailable(String color, int index) {

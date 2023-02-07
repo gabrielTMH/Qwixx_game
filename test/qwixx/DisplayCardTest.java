@@ -59,4 +59,16 @@ public class DisplayCardTest {
         assertNotEquals(card.trackMap.get("Red")[3], DisplayCard.BoxValues.CHECKED);
     }
 
+    @Test
+    void checkMarkPenalty() {
+        card.markPenalty();
+        card.markPenalty();
+
+        assertEquals(card.penalties[0], 'X');
+        assertEquals(card.penalties[1], 'X');
+        assertEquals(card.penalties[2], '_');
+        assertEquals(card.penalties[3], '_');
+        }
+
+
 }

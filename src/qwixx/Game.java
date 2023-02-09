@@ -16,6 +16,8 @@ public class Game {
 
     static Iterator iterator;
 
+    static boolean actionTaken;
+
     public Game() {
         dice = new Die();
         players = new LinkedHashMap<>();
@@ -48,6 +50,9 @@ public class Game {
     }
 
     public static void turn () {
+        //keep track if action has been taken
+        actionTaken = false;
+
         dice.rollAll();
         // modify to show board after every player's move
         for (String player : players.keySet()) {
@@ -70,12 +75,17 @@ public class Game {
         System.out.println(activePlayer + ": would you like to check off the sum of a white " +
                 "die and any of the colors? Type yes/no.");
         if (scan.nextLine().equals("yes")) {
+            actionTaken = true;
             System.out.println("What color would you like to check off?");
             String coloredDie = scan.nextLine();
             System.out.println("Which white die would you like to use?");
             String whiteDie = scan.nextLine();
             players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
                     dice.dieSet.get(whiteDie));
+        }
+        //if action has not been taken, penalty is given
+        if(actionTaken==false) {
+            players.get(activePlayer).markPenalty();
         }
         players.get(activePlayer).displayPlayerCard();
     }

@@ -138,8 +138,8 @@ public class Game {
     }
 
     public boolean lockingMoveCheck (String color, int diceResult) {
-        if (diceResult == 2 && (color.equals("red") || color.equals("yellow"))) return true;
-        else if (diceResult == 12&& (color.equals("blue") || color.equals("green"))) return true;
+        if (diceResult == 12 && (color.equals("red") || color.equals("yellow"))) return true;
+        else if (diceResult == 2 && (color.equals("blue") || color.equals("green"))) return true;
         return false;
     }
 

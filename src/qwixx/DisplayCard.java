@@ -17,6 +17,8 @@ public class DisplayCard {
 
     char[] penalties= {'_', '_', '_', '_'};
 
+    int numPenalties;
+
     public String name;
 
     public DisplayCard(String name){
@@ -81,18 +83,19 @@ public class DisplayCard {
     }
     public void checkBox(String color, int num){
         int index;
-        //Add statement for illegal move (i.g. 13)
+        // TODO Add statement for illegal move (i.g. 13)
         if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
             if( index==10 && rowIsLockable(color)){
-                //lockrow
+                //TODO lockrow
             }
             this.trackMap.get(color)[index] = BoxValues.CHECKED;
         }
         else System.out.println("invalid move");
         hideUnavailable(color, index);
     }
+
     public boolean rowIsLockable(String color){
         //checking row to see if it can lock
         int checkedCount=0;
@@ -106,21 +109,23 @@ public class DisplayCard {
     }
 
     public void markPenalty() {
-        int countPenalties = 0;
+        int count = 0;
         for(char box: this.penalties) {
             if (box== '_') {
-                this.penalties[countPenalties] = 'X';
+                this.penalties[count] = 'X';
                 break;
             }
             else {
-                countPenalties++;
+                count++;
             }
         }
     }
 
     public void LockRowOnCard(){
-        //change any undashed squares on the locked row to dashes
-
+        /*
+            TODO
+             change any undashed squares on the locked row to dashes
+         */
     }
 
 

@@ -7,17 +7,16 @@ public class  Die {
     public LinkedHashMap<String, Integer> dieSet = new LinkedHashMap<>();
 
     public Die() {
-        dieSet.put("White1", 0);
-        dieSet.put("White2", 0);
-        dieSet.put("Red", 0);
-        dieSet.put("Yellow", 0);
-        dieSet.put("Green", 0);
-        dieSet.put("Blue", 0);
+        dieSet.put("white1", 0);
+        dieSet.put("white2", 0);
+        dieSet.put("red", 0);
+        dieSet.put("yellow", 0);
+        dieSet.put("green", 0);
+        dieSet.put("blue", 0);
     }
 
-    public void lockDie(String name) {
-//        TODO
-//        add this function to remove die when row is locked
+    public void lockDie(String color) {
+        dieSet.remove(color);
     }
 
     public void rollAll(){
@@ -34,7 +33,7 @@ public class  Die {
     }
 
     public int sumWhite() {
-        return dieSet.get("White1")+dieSet.get("White2");
+        return dieSet.get("white1")+dieSet.get("white2");
     }
 
 }

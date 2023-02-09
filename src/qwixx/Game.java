@@ -50,18 +50,15 @@ public class Game {
     }
 
     public static void turn () {
-        //keep track if action has been taken
         actionTaken = false;
-
         dice.rollAll();
-        // modify to show board after every player's move
         for (String player : players.keySet()) {
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
-            if (scan.nextLine().equalsIgnoreCase("yes")) {
+            if (scan.nextLine().equals("yes")) {
+                if (player.equals(activePlayer)) actionTaken = true;
                 System.out.println("What color would you like to check off?");
-                //add something that makes it non case-sensitive?
-                String color = scan.nextLine();
-                players.get(player).checkBox(color.toLowerCase(), dice.sumWhite());
+                String color = scan.nextLine().toLowerCase();
+                players.get(player).checkBox(color, dice.sumWhite());
             }
             players.get(player).displayPlayerCard();
         }
@@ -77,15 +74,15 @@ public class Game {
         if (scan.nextLine().equals("yes")) {
             actionTaken = true;
             System.out.println("What color would you like to check off?");
-            String coloredDie = scan.nextLine();
+            String coloredDie = scan.nextLine().toLowerCase();
             System.out.println("Which white die would you like to use?");
             String whiteDie = scan.nextLine();
             players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
                     dice.dieSet.get(whiteDie));
         }
-        //if action has not been taken, penalty is given
         if(actionTaken==false) {
             players.get(activePlayer).markPenalty();
+            ++players.get(activePlayer).numPenalties;
         }
         players.get(activePlayer).displayPlayerCard();
     }
@@ -101,6 +98,11 @@ public class Game {
 
 
     public static void lockRow(String color){
-
+        /*
+            TODO:
+              set all boxes that aren't checked in that row to unavailable
+                do this for all players
+                remove die
+         */
     }
 }

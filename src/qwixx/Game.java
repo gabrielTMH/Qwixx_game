@@ -59,8 +59,7 @@ public class Game {
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
             if (scan.nextLine().equals("yes")) {
                 System.out.println("What color would you like to check off?");
-                //add something that makes it non case-sensitive?
-                String color = scan.nextLine();
+                String color = scan.nextLine().toLowerCase();
                 players.get(player).checkBox(color, dice.sumWhite());
             }
             players.get(player).displayPlayerCard();
@@ -77,13 +76,12 @@ public class Game {
         if (scan.nextLine().equals("yes")) {
             actionTaken = true;
             System.out.println("What color would you like to check off?");
-            String coloredDie = scan.nextLine();
+            String coloredDie = scan.nextLine().toLowerCase();
             System.out.println("Which white die would you like to use?");
             String whiteDie = scan.nextLine();
             players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
                     dice.dieSet.get(whiteDie));
         }
-        //if action has not been taken, penalty is given
         if(actionTaken==false) {
             players.get(activePlayer).markPenalty();
         }

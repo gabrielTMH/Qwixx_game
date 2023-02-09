@@ -81,18 +81,19 @@ public class DisplayCard {
     }
     public void checkBox(String color, int num){
         int index;
-        //Add statement for illegal move (i.g. 13)
+        // TODO Add statement for illegal move (i.g. 13)
         if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
             if( index==10 && rowIsLockable(color)){
-                //lockrow
+                //TODO lockrow
             }
             this.trackMap.get(color)[index] = BoxValues.CHECKED;
         }
         else System.out.println("invalid move");
         hideUnavailable(color, index);
     }
+
     public boolean rowIsLockable(String color){
         //checking row to see if it can lock
         int checkedCount=0;
@@ -119,7 +120,7 @@ public class DisplayCard {
     }
 
     public void LockRowOnCard(){
-        //change any undashed squares on the locked row to dashes
+        // TODO change any undashed squares on the locked row to dashes
 
     }
 

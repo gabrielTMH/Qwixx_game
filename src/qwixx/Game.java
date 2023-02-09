@@ -82,6 +82,19 @@ public class Game {
 
     public static void setActivePlayer () {
         if (iterator.hasNext()) activePlayer = iterator.next().toString();
-        else activePlayer = players.keySet().toArray()[0].toString();
+        else {
+            iterator = players.keySet().iterator();
+            activePlayer = iterator.next().toString();
+        }
+    }
+
+    public static void checkLockRow(){
+        //checking each color row to see if it can lock
+
+
+    }
+
+    public static void lockRow(String color){
+
     }
 }

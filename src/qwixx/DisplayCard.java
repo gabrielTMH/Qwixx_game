@@ -104,6 +104,11 @@ public class DisplayCard {
         }
     }
 
+    public void LockRowOnCard(){
+        //change any undashed squares on the locked row to dashes
+
+    }
+
 
 }
 

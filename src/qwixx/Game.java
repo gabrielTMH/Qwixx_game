@@ -62,28 +62,52 @@ public class Game {
             if (scan.nextLine().equals("yes")) {
                 System.out.println("What color would you like to check off?");
                 String color = scan.nextLine().toLowerCase();
-                players.get(player).checkBox(color, dice.sumWhite());
-                if (player.equals(activePlayer)) actionTaken = true;
+                if (lockingMoveCheck(color, dice.sumWhite())) {
+                    if (!players.get(player).rowIsLockable(color))
+                        System.out.println("That row is not lockable yet :(");
+                    else {
+                        setRowToLock(color);
+                        players.get(player).checkBox(color, dice.sumWhite());
+                        if (player.equals(activePlayer)) actionTaken = true;
+                    }
+                }
+                else {
+                    players.get(player).checkBox(color, dice.sumWhite());
+                    if (player.equals(activePlayer)) actionTaken = true;
+                }
+
             }
             players.get(player).displayPlayerCard();
         }
-        // rows locked after white dice
+        lockRows();
         activePlayerTurn();
+        lockRows();
         setActivePlayer();
-        // lock again after active player
     }
 
     public void activePlayerTurn () {
         System.out.println(activePlayer + ": would you like to check off the sum of a white " +
                 "die and any of the colors? Type yes/no.");
         if (scan.nextLine().equals("yes")) {
-            actionTaken = true;
             System.out.println("What color would you like to check off?");
             String coloredDie = scan.nextLine().toLowerCase();
             System.out.println("Which white die would you like to use?");
             String whiteDie = scan.nextLine();
-            players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
-                    dice.dieSet.get(whiteDie));
+            if (lockingMoveCheck(coloredDie, dice.sumWhite())) {
+                if (!players.get(activePlayer).rowIsLockable(coloredDie))
+                    System.out.println("That row is not lockable yet :(");
+                else {
+                    setRowToLock(coloredDie);
+                    players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
+                            dice.dieSet.get(whiteDie));
+                    actionTaken = true;
+                }
+            }
+            else {
+                players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
+                        dice.dieSet.get(whiteDie));
+                actionTaken = true;
+            }
         }
         if(!actionTaken) {
             players.get(activePlayer).markPenalty();
@@ -106,26 +130,23 @@ public class Game {
         ++numLockedRows;
     }
 
-    public void lockingMoveCheck(String color, int diceResult, String player) {
-        if (diceResult == 2) {
-            if (color.equals("red")) {
-                if (players.get(player).rowIsLockable(color)) lockRed = true;
-                else System.out.println("That row is not lockable yet");
-            }
-            else if (color.equals("yellow")) {
-                if (players.get(player).rowIsLockable(color)) lockYellow = true;
-                else System.out.println("That row is not lockable yet");
-            }
-        }
-        else if (diceResult == 12) {
-            if (color.equals("green")) {
-                if (players.get(player).rowIsLockable(color)) lockGreen = true;
-                else System.out.println("That row is not lockable yet");
-            }
-            else if (color.equals("blue")) {
-                if (players.get(player).rowIsLockable(color)) lockBlue = true;
-                else System.out.println("That row is not lockable yet");
-            }
-        }
+    public void lockRows() {
+        if (lockRed) lockRow("red");
+        if (lockGreen) lockRow("green");
+        if (lockBlue) lockRow("blue");
+        if (lockYellow) lockRow("yellow");
+    }
+
+    public boolean lockingMoveCheck (String color, int diceResult) {
+        if (diceResult == 2 && (color.equals("red") || color.equals("yellow"))) return true;
+        else if (diceResult == 12&& (color.equals("blue") || color.equals("green"))) return true;
+        return false;
+    }
+
+    public void setRowToLock(String color) {
+        if (color.equals("red")) lockRed = true;
+        else if (color.equals("yellow")) lockYellow = true;
+        else if (color.equals("green")) lockGreen =true;
+        else if (color.equals("blue")) lockBlue =true;
     }
 }

@@ -17,6 +17,8 @@ public class DisplayCard {
 
     char[] penalties= {'_', '_', '_', '_'};
 
+    int numPenalties;
+
     public String name;
 
     public DisplayCard(String name){
@@ -107,21 +109,23 @@ public class DisplayCard {
     }
 
     public void markPenalty() {
-        int countPenalties = 0;
+        int count = 0;
         for(char box: this.penalties) {
             if (box== '_') {
-                this.penalties[countPenalties] = 'X';
+                this.penalties[count] = 'X';
                 break;
             }
             else {
-                countPenalties++;
+                count++;
             }
         }
     }
 
     public void LockRowOnCard(){
-        // TODO change any undashed squares on the locked row to dashes
-
+        /*
+            TODO
+             change any undashed squares on the locked row to dashes
+         */
     }
 
 

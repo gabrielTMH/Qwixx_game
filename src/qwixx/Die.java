@@ -15,9 +15,8 @@ public class  Die {
         dieSet.put("blue", 0);
     }
 
-    public void lockDie(String name) {
-//        TODO
-//        add this function to remove die when row is locked
+    public void lockDie(String color) {
+        dieSet.remove(color);
     }
 
     public void rollAll(){

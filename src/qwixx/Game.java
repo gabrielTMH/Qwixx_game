@@ -50,14 +50,12 @@ public class Game {
     }
 
     public static void turn () {
-        //keep track if action has been taken
         actionTaken = false;
-
         dice.rollAll();
-        // modify to show board after every player's move
         for (String player : players.keySet()) {
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
             if (scan.nextLine().equals("yes")) {
+                if (player.equals(activePlayer)) actionTaken = true;
                 System.out.println("What color would you like to check off?");
                 String color = scan.nextLine().toLowerCase();
                 players.get(player).checkBox(color, dice.sumWhite());
@@ -84,6 +82,7 @@ public class Game {
         }
         if(actionTaken==false) {
             players.get(activePlayer).markPenalty();
+            ++players.get(activePlayer).numPenalties;
         }
         players.get(activePlayer).displayPlayerCard();
     }
@@ -99,6 +98,11 @@ public class Game {
 
 
     public static void lockRow(String color){
-
+        /*
+            TODO:
+              set all boxes that aren't checked in that row to unavailable
+                do this for all players
+                remove die
+         */
     }
 }

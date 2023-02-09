@@ -18,14 +18,14 @@ public class GameTest {
     @Test
     void constructorSetsFirstActivePlayer() {
         g.setActivePlayer();
-        assertEquals("p1", g.activePlayer.toString());
+        assertEquals("p1", g.activePlayer);
     }
 
     @Test
     void switchesActivePlayer() {
         g.setActivePlayer();
         g.setActivePlayer();
-        assertEquals("p2", g.activePlayer.toString());
+        assertEquals("p2", g.activePlayer);
     }
 
     @Test
@@ -36,6 +36,29 @@ public class GameTest {
         g.setActivePlayer(); //1
         g.setActivePlayer(); //2
         g.setActivePlayer(); //3
-        assertEquals("p3", g.activePlayer.toString());
+        assertEquals("p3", g.activePlayer);
+    }
+
+    @Test
+    void locksRowsForAllPlayers() {
+        g.players.get("p1").checkBox("red", 2);
+        g.players.get("p1").checkBox("red", 3);
+        g.players.get("p1").checkBox("red", 4);
+        g.players.get("p1").checkBox("red", 5);
+        g.players.get("p1").checkBox("red", 6);
+        g.players.get("p1").checkBox("red", 12);
+        g.lockRow("red");
+        g.displayCards();
+    }
+
+    @Test
+    void onlyLocksIfFiveChecked() {
+        assertFalse(g.players.get("p1").rowIsLockable("red"));
+        g.players.get("p1").checkBox("red", 2);
+        g.players.get("p1").checkBox("red", 3);
+        g.players.get("p1").checkBox("red", 4);
+        g.players.get("p1").checkBox("red", 5);
+        g.players.get("p1").checkBox("red", 6);
+        assertTrue(g.players.get("p1").rowIsLockable("red"));
     }
 }

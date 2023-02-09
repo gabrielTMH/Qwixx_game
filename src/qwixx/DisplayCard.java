@@ -87,9 +87,6 @@ public class DisplayCard {
         if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
-            if( index==10 && rowIsLockable(color)){
-                //TODO lockrow
-            }
             this.trackMap.get(color)[index] = BoxValues.CHECKED;
         }
         else System.out.println("invalid move");
@@ -99,9 +96,8 @@ public class DisplayCard {
     public boolean rowIsLockable(String color){
         //checking row to see if it can lock
         int checkedCount=0;
-        for (int i = 0; i < 9 ; i++) {
-            if(this.trackMap.get(color)[i] == BoxValues.CHECKED){
-                System.out.println(i);
+        for (Object box: trackMap.get(color)) {
+            if(box == BoxValues.CHECKED){
                 checkedCount++;
             }
         }
@@ -121,11 +117,11 @@ public class DisplayCard {
         }
     }
 
-    public void LockRowOnCard(){
-        /*
-            TODO
-             change any undashed squares on the locked row to dashes
-         */
+    public void lockRowOnCard(String color){
+        for (int i = 0; i < 11; ++i) {
+            if(this.trackMap.get(color)[i] == BoxValues.AVAILABLE)
+                this.trackMap.get(color)[i] = BoxValues.UNAVAILABLE;
+        }
     }
 
 

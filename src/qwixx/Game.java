@@ -6,29 +6,32 @@ import java.util.Scanner;
 
 public class Game {
 
-    static LinkedHashMap<String, DisplayCard> players;
+    LinkedHashMap<String, DisplayCard> players;
 
-    static Die dice;
+    Die dice;
 
-    static Scanner scan;
+    Scanner scan;
 
-    static String activePlayer;
+    String activePlayer;
 
-    static Iterator iterator;
+    Iterator<String> iterator;
 
-    static boolean actionTaken;
+    boolean actionTaken;
+
+    int numLockedRows;
 
     public Game() {
+        numLockedRows = 0;
         dice = new Die();
         players = new LinkedHashMap<>();
         scan = new Scanner(System.in);
     }
 
-    public static void displayCards() {
+    public void displayCards() {
         for (DisplayCard playerCard : players.values()) playerCard.displayPlayerCard();
     }
 
-    public static void insertPlayers() {
+    public void insertPlayers() {
         System.out.print("Enter number of players (2-5): ");
 
         int numPlayers = scan.nextInt();
@@ -49,7 +52,7 @@ public class Game {
         setActivePlayer();
     }
 
-    public static void turn () {
+    public void turn () {
         actionTaken = false;
         dice.rollAll();
         for (String player : players.keySet()) {
@@ -68,7 +71,7 @@ public class Game {
         // lock again after active player
     }
 
-    public static void activePlayerTurn () {
+    public void activePlayerTurn () {
         System.out.println(activePlayer + ": would you like to check off the sum of a white " +
                 "die and any of the colors? Type yes/no.");
         if (scan.nextLine().equals("yes")) {
@@ -80,29 +83,24 @@ public class Game {
             players.get(activePlayer).checkBox(coloredDie, dice.dieSet.get(coloredDie) +
                     dice.dieSet.get(whiteDie));
         }
-        if(actionTaken==false) {
+        if(!actionTaken) {
             players.get(activePlayer).markPenalty();
             ++players.get(activePlayer).numPenalties;
         }
         players.get(activePlayer).displayPlayerCard();
     }
 
-    public static void setActivePlayer () {
-        if (iterator.hasNext()) activePlayer = iterator.next().toString();
+    public void setActivePlayer () {
+        if (iterator.hasNext()) activePlayer = iterator.next();
         else {
             iterator = players.keySet().iterator();
-            activePlayer = iterator.next().toString();
+            activePlayer = iterator.next();
         }
     }
 
-
-
-    public static void lockRow(String color){
-        /*
-            TODO:
-              set all boxes that aren't checked in that row to unavailable
-                do this for all players
-                remove die
-         */
+    public void lockRow(String color){
+        for (String player: players.keySet()) players.get(player).lockRowOnCard(color);
+        dice.lockDie(color);
+        ++numLockedRows;
     }
 }

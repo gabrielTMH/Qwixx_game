@@ -32,17 +32,17 @@ public class DisplayCard {
 
     public LinkedHashMap<String, Object[]> createTrackMap() {
         LinkedHashMap<String, Object[]> playerMap = new LinkedHashMap<>();
-        playerMap.put("Red", BoxValues.newTrack());
-        playerMap.put("Yellow", BoxValues.newTrack());
-        playerMap.put("Green", BoxValues.newTrack());
-        playerMap.put("Blue", BoxValues.newTrack());
+        playerMap.put("red", BoxValues.newTrack());
+        playerMap.put("yellow", BoxValues.newTrack());
+        playerMap.put("green", BoxValues.newTrack());
+        playerMap.put("blue", BoxValues.newTrack());
         return playerMap;
     }
 
     public static void displayTracks(LinkedHashMap<String, Object[]> card) {
         int count;
         for(String trackColor: card.keySet()) {
-            if (trackColor.equals("Red") || trackColor.equals("Yellow")) {
+            if (trackColor.equals("red") || trackColor.equals("yellow")) {
                 System.out.print(trackColor + " ");
                 count = 2;
                 for (Object box: card.get(trackColor)){
@@ -82,13 +82,27 @@ public class DisplayCard {
     public void checkBox(String color, int num){
         int index;
         //Add statement for illegal move (i.g. 13)
-        if(color.equals("Red") || color.equals("Yellow")) index = num - 2;
+        if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
+            if( index==10 && rowIsLockable(color)){
+                //lockrow
+            }
             this.trackMap.get(color)[index] = BoxValues.CHECKED;
         }
         else System.out.println("invalid move");
         hideUnavailable(color, index);
+    }
+    public boolean rowIsLockable(String color){
+        //checking row to see if it can lock
+        int checkedCount=0;
+        for (int i = 0; i < 9 ; i++) {
+            if(this.trackMap.get(color)[i] == BoxValues.CHECKED){
+                System.out.println(i);
+                checkedCount++;
+            }
+        }
+        return checkedCount>=5;
     }
 
     public void markPenalty() {
@@ -102,6 +116,11 @@ public class DisplayCard {
                 countPenalties++;
             }
         }
+    }
+
+    public void LockRowOnCard(){
+        //change any undashed squares on the locked row to dashes
+
     }
 
 

@@ -57,12 +57,11 @@ public class Game {
         // modify to show board after every player's move
         for (String player : players.keySet()) {
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
-            if (scan.nextLine().equals("yes")) {
-                actionTaken = true;
+            if (scan.nextLine().equalsIgnoreCase("yes")) {
                 System.out.println("What color would you like to check off?");
                 //add something that makes it non case-sensitive?
                 String color = scan.nextLine();
-                players.get(player).checkBox(color, dice.sumWhite());
+                players.get(player).checkBox(color.toLowerCase(), dice.sumWhite());
             }
             players.get(player).displayPlayerCard();
         }
@@ -93,6 +92,15 @@ public class Game {
 
     public static void setActivePlayer () {
         if (iterator.hasNext()) activePlayer = iterator.next().toString();
-        else activePlayer = players.keySet().toArray()[0].toString();
+        else {
+            iterator = players.keySet().iterator();
+            activePlayer = iterator.next().toString();
+        }
+    }
+
+
+
+    public static void lockRow(String color){
+
     }
 }

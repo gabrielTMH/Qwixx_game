@@ -29,7 +29,7 @@ class DieTest {
         int[] counts = new int[7];
         for (int i = 0; i < 600; i++) {
             d.rollAll();
-            counts[d.dieSet.get("Red")]++;
+            counts[d.dieSet.get("red")]++;
         }
         for (int i = 1; i <= 6; i++) {
             assertTrue(counts[i]>50);

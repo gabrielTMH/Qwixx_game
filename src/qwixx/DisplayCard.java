@@ -87,9 +87,6 @@ public class DisplayCard {
         if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
-            if( index==10 && rowIsLockable(color)){
-                //TODO lockrow
-            }
             this.trackMap.get(color)[index] = BoxValues.CHECKED;
         }
         else System.out.println("invalid move");

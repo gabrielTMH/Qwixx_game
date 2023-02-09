@@ -20,6 +20,8 @@ public class Game {
 
     int numLockedRows;
 
+    boolean lockRed, lockBlue, lockGreen, lockYellow;
+
     public Game() {
         numLockedRows = 0;
         dice = new Die();
@@ -58,10 +60,10 @@ public class Game {
         for (String player : players.keySet()) {
             System.out.println(player + ": would you like to check off " + dice.sumWhite() + "? Type yes/no.");
             if (scan.nextLine().equals("yes")) {
-                if (player.equals(activePlayer)) actionTaken = true;
                 System.out.println("What color would you like to check off?");
                 String color = scan.nextLine().toLowerCase();
                 players.get(player).checkBox(color, dice.sumWhite());
+                if (player.equals(activePlayer)) actionTaken = true;
             }
             players.get(player).displayPlayerCard();
         }
@@ -102,5 +104,28 @@ public class Game {
         for (String player: players.keySet()) players.get(player).lockRowOnCard(color);
         dice.lockDie(color);
         ++numLockedRows;
+    }
+
+    public void lockingMoveCheck(String color, int diceResult, String player) {
+        if (diceResult == 2) {
+            if (color.equals("red")) {
+                if (players.get(player).rowIsLockable(color)) lockRed = true;
+                else System.out.println("That row is not lockable yet");
+            }
+            else if (color.equals("yellow")) {
+                if (players.get(player).rowIsLockable(color)) lockYellow = true;
+                else System.out.println("That row is not lockable yet");
+            }
+        }
+        else if (diceResult == 12) {
+            if (color.equals("green")) {
+                if (players.get(player).rowIsLockable(color)) lockGreen = true;
+                else System.out.println("That row is not lockable yet");
+            }
+            else if (color.equals("blue")) {
+                if (players.get(player).rowIsLockable(color)) lockBlue = true;
+                else System.out.println("That row is not lockable yet");
+            }
+        }
     }
 }

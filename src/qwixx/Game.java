@@ -103,4 +103,17 @@ public class Game {
     public static void lockRow(String color){
 
     }
+    public static void scoreCard(LinkedHashMap<String, Object[]> playerCard){
+        double score = 0;
+        for(String trackColor: playerCard.keySet()) {
+            for (Object box: playerCard.get(trackColor)){
+                if (box == DisplayCard.BoxValues.CHECKED) score += 1;
+            }
+            score = 0.5*(Math.pow(score,2))+0.5*(score);
+        }
+        for (int i = 0; i < players.get(activePlayer).numPenalties; i++) {
+            score -= 5;
+        }
+        System.out.println(score);
+    }
 }

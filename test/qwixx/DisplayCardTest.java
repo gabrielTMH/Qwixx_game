@@ -60,6 +60,19 @@ public class DisplayCardTest {
     }
 
     @Test
+    void fiveChecksIsLockable() {
+        card.checkBox("Red", 2);
+        card.checkBox("Red", 3);
+        card.checkBox("Red", 4);
+        card.checkBox("Red", 5);
+        card.checkBox("Red", 6);
+
+        card.displayPlayerCard();
+        assertEquals(true, card.rowIsLockable("Red"));
+
+    }
+
+    @Test
     void checkMarkPenalty() {
         card.markPenalty();
         card.markPenalty();

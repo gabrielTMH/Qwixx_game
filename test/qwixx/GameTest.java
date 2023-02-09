@@ -30,10 +30,12 @@ public class GameTest {
 
     @Test
     void loopsBackToFirstPlayer() {
-        g.setActivePlayer();
-        g.setActivePlayer();
-        g.setActivePlayer();
-        g.setActivePlayer();
-        assertEquals("p1", g.activePlayer.toString());
+        g.setActivePlayer(); //1
+        g.setActivePlayer(); //2
+        g.setActivePlayer(); //3
+        g.setActivePlayer(); //1
+        g.setActivePlayer(); //2
+        g.setActivePlayer(); //3
+        assertEquals("p3", g.activePlayer.toString());
     }
 }

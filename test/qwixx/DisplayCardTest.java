@@ -36,6 +36,7 @@ public class DisplayCardTest {
     @Test
     void checkBoxFunctions() {
         card.checkBox("Red", 7);
+        card.displayPlayerCard();
         assertEquals(card.trackMap.get("Red")[5], DisplayCard.BoxValues.CHECKED);
     }
 
@@ -57,6 +58,19 @@ public class DisplayCardTest {
         card.checkBox("Red", 6);
         card.checkBox("Red", 3);
         assertNotEquals(card.trackMap.get("Red")[3], DisplayCard.BoxValues.CHECKED);
+    }
+
+    @Test
+    void fiveChecksIsLockable() {
+        card.checkBox("Red", 2);
+        card.checkBox("Red", 3);
+        card.checkBox("Red", 4);
+        card.checkBox("Red", 5);
+        card.checkBox("Red", 6);
+
+        card.displayPlayerCard();
+        assertEquals(true, card.rowIsLockable("Red"));
+
     }
 
     @Test

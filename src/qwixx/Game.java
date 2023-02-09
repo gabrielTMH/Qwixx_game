@@ -88,11 +88,7 @@ public class Game {
         }
     }
 
-    public static void checkLockRow(){
-        //checking each color row to see if it can lock
 
-
-    }
 
     public static void lockRow(String color){
 

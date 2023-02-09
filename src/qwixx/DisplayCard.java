@@ -85,10 +85,24 @@ public class DisplayCard {
         if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
+            if( index==10 && rowIsLockable(color)){
+                //lockrow
+            }
             this.trackMap.get(color)[index] = BoxValues.CHECKED;
         }
         else System.out.println("invalid move");
         hideUnavailable(color, index);
+    }
+    public boolean rowIsLockable(String color){
+        //checking row to see if it can lock
+        int checkedCount=0;
+        for (int i = 0; i < 9 ; i++) {
+            if(this.trackMap.get(color)[i] == BoxValues.CHECKED){
+                System.out.println(i);
+                checkedCount++;
+            }
+        }
+        return checkedCount>=5;
     }
 
     public void markPenalty() {

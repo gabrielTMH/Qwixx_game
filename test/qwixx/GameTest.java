@@ -61,4 +61,29 @@ public class GameTest {
         g.players.get("p1").checkBox("red", 6);
         assertTrue(g.players.get("p1").rowIsLockable("red"));
     }
+
+    @Test
+    void gameEndsWithTwoLockedRows() {
+        assertFalse(g.gameOver());
+        g.lockRow("red");
+        g.lockRow("blue");
+        assertTrue(g.gameOver());
+    }
+
+    @Test
+    void gameEndsWithFourPenalties() {
+        assertFalse(g.gameOver());
+        g.players.get("p1").numPenalties = 4;
+        assertTrue(g.gameOver());
+    }
+
+    @Test
+    void scoresAreCorrect() {
+        g.players.get("p1").checkBox("red", 2);
+        g.players.get("p1").checkBox("red", 3);
+        g.players.get("p1").checkBox("blue", 2);
+        g.players.get("p1").checkBox("green", 3);
+        g.players.get("p1").numPenalties += 2;
+        assertEquals(-5.0, g.players.get("p1").getScore());
+    }
 }

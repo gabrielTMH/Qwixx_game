@@ -12,7 +12,7 @@ public class DisplayCard {
             return result;
         }
     }
-//
+
     public LinkedHashMap<String, Object[]> trackMap;
 
     char[] penalties= {'_', '_', '_', '_'};
@@ -83,7 +83,6 @@ public class DisplayCard {
     }
     public void checkBox(String color, int num){
         int index;
-        // TODO Add statement for illegal move (i.g. 13)
         if(color.equals("red") || color.equals("yellow")) index = num - 2;
         else index = 12 - num;
         if(this.trackMap.get(color)[index] == BoxValues.AVAILABLE){
@@ -124,6 +123,18 @@ public class DisplayCard {
         }
     }
 
+    public double getScore(){
+        double score = 0;
+        for (String color: this.trackMap.keySet()) {
+            int rowScore = 0;
+            for (Object box: this.trackMap.get(color)){
+                if (box == DisplayCard.BoxValues.CHECKED) rowScore += 1;
+            }
+            score += 0.5*Math.pow(rowScore, 2) + 0.5*rowScore;
+        }
+        score -= 5 * this.numPenalties;
+        return score;
+    }
 
 }
 

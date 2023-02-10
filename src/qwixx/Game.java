@@ -117,11 +117,8 @@ public class Game {
     }
 
     public void setActivePlayer () {
-        if (iterator.hasNext()) activePlayer = iterator.next();
-        else {
-            iterator = players.keySet().iterator();
-            activePlayer = iterator.next();
-        }
+        if (!iterator.hasNext()) iterator = players.keySet().iterator();
+        activePlayer = iterator.next();
     }
 
     public void lockRow(String color){
@@ -139,27 +136,27 @@ public class Game {
 
     public boolean lockingMoveCheck (String color, int diceResult) {
         if (diceResult == 12 && (color.equals("red") || color.equals("yellow"))) return true;
-        else if (diceResult == 2 && (color.equals("blue") || color.equals("green"))) return true;
-        return false;
+        else return diceResult == 2 && (color.equals("blue") || color.equals("green"));
     }
 
     public void setRowToLock(String color) {
-        if (color.equals("red")) lockRed = true;
-        else if (color.equals("yellow")) lockYellow = true;
-        else if (color.equals("green")) lockGreen =true;
-        else if (color.equals("blue")) lockBlue =true;
+        switch (color) {
+            case "red" -> lockRed = true;
+            case "yellow" -> lockYellow = true;
+            case "green" -> lockGreen = true;
+            case "blue" -> lockBlue = true;
+        }
     }
-    public static void scoreCard(LinkedHashMap<String, Object[]> playerCard){
-        double score = 0;
-        for(String trackColor: playerCard.keySet()) {
-            for (Object box: playerCard.get(trackColor)){
-                if (box == DisplayCard.BoxValues.CHECKED) score += 1;
-            }
-            score = 0.5*(Math.pow(score,2))+0.5*(score);
+
+    public void printScores() {
+        for (String player: players.keySet()) System.out.println(player + ": "+ players.get(player).getScore());
+    }
+
+    public boolean gameOver() {
+        if (numLockedRows >= 2) return true;
+        for (String player: players.keySet()) {
+            if (players.get(player).numPenalties == 4) return true;
         }
-        for (int i = 0; i < players.get(activePlayer).numPenalties; i++) {
-            score -= 5;
-        }
-        System.out.println(score);
+        return false;
     }
 }
